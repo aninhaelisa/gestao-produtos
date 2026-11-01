@@ -1,0 +1,25 @@
+:root {
+  --pink-bright: #f45b9d;
+  --pink-light: #f3a6c5;
+  --pink-soft: #fae2ec;
+  --white: #ffffff;
+  --black: #050505;
+  --placeholder: #b3b3b3;
+  --background: linear-gradient(22deg, #ff4391 0%, #ef5193 27%, #eaa0c1 68%, #eaa0c1 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+}
