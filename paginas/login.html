@@ -8,9 +8,31 @@
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
-  <main>
+  <div class="container border border-5 border-white rounded bg-transparent p-4 text-white rounded-5 custom-container">
+    <form action="../config/conexao.php" method="POST">
+      <div class="mb-3">
+          <div class="input-group custom-input-group">
+              <span class="input-group-text border-white custom-span">
+                  <img src="../assets/src/icons/user.png" alt="User" width="18" height="18" class="icon-white">
+              </span>
+              <input type="text" name="email" autocomplete="username" class="form-control border-white text-black custom-input " placeholder="USUÁRIO" required>
+          </div>
+      </div>
+      <div class="mb-4"> 
+          <div class="input-group custom-input-group">
+              <span class="input-group-text border-white custom-span">
+                  <img src="../assets/src/icons/password.png" alt="Password" width="18" height="18" class="icon-white">
+              </span>
+              <input type="password" name="senha" autocomplete="current-password" class="form-control border-white text-black custom-input " placeholder="SENHA" required>
+          </div>
 
-  </main>
+      </div>
+      <div class="link-mover"><a href="#">Esqueceu a senha?</a></div>
+
+      <button type="submit" class="btn  w-100 custom-btn">Entrar</button>
+      </form>
+
+  </div>
 
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
