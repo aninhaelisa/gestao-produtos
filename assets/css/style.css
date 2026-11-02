@@ -3,9 +3,9 @@
   --pink-light: #f3a6c5;
   --pink-soft: #fae2ec;
   --white: #ffffff;
-  --black: #050505;
+  --black: #000000;
   --placeholder: #b3b3b3;
-  --background: linear-gradient(22deg, #ff4391 0%, #ef5193 27%, #eaa0c1 68%, #eaa0c1 100%);
+  --background: #222222; /*linear-gradient(22deg, #ff4391 0%, #ef5193 27%, #eaa0c1 68%, #eaa0c1 100%);*/
 
   --menu-bg: #313131;
   --menu-primary: #f45b9d;
@@ -29,6 +29,12 @@ body {
   min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
   background: var(--background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body.pagina-login {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -89,7 +95,7 @@ body {
 }
 
 .link-mover a {
-  color: var(--black);
+  color: white;
   font-size: 10px;
   font-style: italic;
 }
@@ -273,15 +279,12 @@ body {
   color: var(--white);
 }
 
-.h-100 {
-  width: 300px !important;
-  margin-top: 25px !important;
+.card-produto {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.mt-4 {
-  padding: 38px !important;
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: wrap !important;
-  align-items: center !important;
+.mb-4 {
+  margin-bottom: 15px !important;
 }

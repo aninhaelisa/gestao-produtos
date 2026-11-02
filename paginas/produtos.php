@@ -5,7 +5,7 @@ if (!isset($_SESSION['usuario_id'])) {
     exit;
 }
 
-require_once __DIR__ . '/../auth/conexao.php';
+require_once __DIR__ . '/../config/conexao.php';
 
 $mensagem = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_produto_id'])) {
@@ -27,13 +27,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_produto_id'])) {
     $stmt->close();
 }
 
-$stmt = $conn->prepare(
-    "SELECT id, nome, descricao, preco
-     FROM produtos
-     WHERE usuario_id = ? AND ativo = 1
-     ORDER BY nome"
-);
-$stmt->bind_param("i", $_SESSION['usuario_id']);
+$busca = trim($_GET['q'] ?? '');
+
+if ($busca !== '') {
+    $like = '%' . $busca . '%';
+    $stmt = $conn->prepare(
+        "SELECT id, nome, descricao, preco
+         FROM produtos
+         WHERE usuario_id = ? AND ativo = 1
+           AND (nome LIKE ? OR descricao LIKE ?)
+         ORDER BY nome"
+    );
+    $stmt->bind_param("iss", $_SESSION['usuario_id'], $like, $like);
+} else {
+    $stmt = $conn->prepare(
+        "SELECT id, nome, descricao, preco
+         FROM produtos
+         WHERE usuario_id = ? AND ativo = 1
+         ORDER BY nome"
+    );
+    $stmt->bind_param("i", $_SESSION['usuario_id']);
+}
+
 $stmt->execute();
 $produtos = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
@@ -51,7 +66,7 @@ $conn->close();
     <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 
-<body>
+<body class="pagina-login">
 
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
         <span></span>
@@ -69,7 +84,7 @@ $conn->close();
         </ul>
     </nav>
 
-    <div class="box-produtos">
+    <div class="box-produtos px-3 px-md-4" style="position: static; height: auto; overflow: visible;">
         <form role="search" method="get" style="max-width: 400px;" class="formulario-pesquisa">
             <div class="input-group search-custom rounded-pill border border-white rounded">
                 <input type="search"
