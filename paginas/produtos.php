@@ -1,20 +1,11 @@
 <?php
 session_start();
-
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: ../paginas/login.html");
     exit;
 }
-$host       = "localhost";
-$usuario_db = "root";
-$senha_db   = "55812890";
-$banco      = "sistema_gestao_produtos";
 
-$conn = new mysqli($host, $usuario_db, $senha_db, $banco);
-if ($conn->connect_error) {
-    die("Falha na conexão: " . $conn->connect_error);
-}
-$conn->set_charset("utf8mb4");
+require_once __DIR__ . '/../auth/conexao.php';
 
 $mensagem = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_produto_id'])) {
@@ -79,9 +70,14 @@ $conn->close();
     </nav>
 
     <div class="box-produtos">
-        <form role="search" style="max-width: 400px;" class="formulario-pesquisa">
+        <form role="search" method="get" style="max-width: 400px;" class="formulario-pesquisa">
             <div class="input-group search-custom rounded-pill border border-white rounded">
-                <input type="search" class="form-control bg-transparent text-white border-0 shadow-none placeholder-white" placeholder="Pesquisar..." aria-label="Pesquisar">
+                <input type="search"
+                    name="q"
+                    value="<?= htmlspecialchars($_GET['q'] ?? '') ?>"
+                    class="form-control bg-transparent text-white border-0 shadow-none placeholder-white"
+                    placeholder="Pesquisar..."
+                    aria-label="Pesquisar">
                 <button class="btn bg-transparent text-white border-0 shadow-none" type="submit" aria-label="Buscar">
                     <i class="bi bi-search"></i>
                 </button>
