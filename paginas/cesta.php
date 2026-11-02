@@ -36,7 +36,7 @@ if (!empty($_SESSION['cesta'])) {
     $ids = array_values(array_unique(array_map('intval', $_SESSION['cesta'])));
 
     $placeholders = implode(',', array_fill(0, count($ids), '?'));
-    $tipos        = str_repeat('i', count($ids)) . 'i';         
+    $tipos        = str_repeat('i', count($ids)) . 'i';
     $params       = array_merge($ids, [$_SESSION['usuario_id']]);
 
     $sql = "SELECT id, nome, descricao, preco
@@ -65,8 +65,8 @@ if (!empty($_SESSION['cesta'])) {
 }
 
 $conn->close();
-const FRETE_VALOR         = 15.00;  
-const FRETE_GRATIS_ACIMA  = 100.00; 
+const FRETE_VALOR         = 15.00;
+const FRETE_GRATIS_ACIMA  = 100.00;
 
 if ($subtotal <= 0) {
     $frete = 0.00;
@@ -103,6 +103,7 @@ $total = $subtotal + $frete;
             <li><a href="cesta.php"><i class="bi bi-cart3"></i><span>Cesta</span></a></li>
             <li><a href="adicionar_fornecedor.php"><i class="bi bi-person-square"></i><span>Add fornecedor</span></a></li>
             <li><a href="produtos.php"><i class="bi bi-archive-fill"></i><span>Produtos</span></a></li>
+            <li><a href="gerenciar_dados.php"><i class="bi bi-pencil-square"></i><span>Gerenciar dados</span></a></li>
         </ul>
     </nav>
 
@@ -147,6 +148,11 @@ $total = $subtotal + $frete;
                 </ul>
 
                 <div class="p-4 rounded mb-4" style="background: var(--menu-bg);">
+
+                    <div class="d-flex justify-content-between text-white mb-2">
+                        <span>Quantidade de produtos</span>
+                        <span><strong><?= count($itens) ?></strong> item(ns)</span>
+                    </div>
                     <div class="d-flex justify-content-between text-white mb-2">
                         <span>Subtotal</span>
                         <span>R$ <?= number_format($subtotal, 2, ',', '.') ?></span>
@@ -181,9 +187,9 @@ $total = $subtotal + $frete;
                     <form method="post" class="m-0 flex-grow-1">
                         <input type="hidden" name="limpar" value="1">
                         <button type="submit"
-                                class="custom-btn w-100"
-                                style="background: transparent; border: 2px solid var(--pink-bright); color: var(--pink-bright);"
-                                onclick="return confirm('Esvaziar a cesta?');">
+                            class="custom-btn w-100"
+                            style="background: transparent; border: 2px solid var(--pink-bright); color: var(--pink-bright);"
+                            onclick="return confirm('Esvaziar a cesta?');">
                             <i class="bi bi-x-circle"></i> Esvaziar cesta
                         </button>
                     </form>

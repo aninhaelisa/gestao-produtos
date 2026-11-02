@@ -118,6 +118,7 @@ $sucesso = isset($_GET['ok']) && $_GET['ok'] == 1;
             <li><a href="cesta.php"><i class="bi bi-cart3"></i><span>Cesta</span></a></li>
             <li><a href="adicionar_fornecedor.php"><i class="bi bi-person-square"></i><span>Add fornecedor</span></a></li>
             <li><a href="produtos.php"><i class="bi bi-archive-fill"></i><span>Produtos</span></a></li>
+            <li><a href="gerenciar_dados.php"><i class="bi bi-pencil-square"></i><span>Gerenciar dados</span></a></li>
         </ul>
     </nav>
 
