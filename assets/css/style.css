@@ -55,6 +55,8 @@ body.pagina-login {
   text-transform: uppercase;
   border: none;
   padding: 12px;
+  color: var(--black);
+  transition: all .3s ease-in-out;
 }
 
 .custom-btn:hover {
@@ -331,4 +333,21 @@ body.pagina-login {
   font-size: 1.3rem;
   margin-top: 1rem !important;
   margin-bottom: 1rem !important;
+}
+
+.custom-btn-cesta-na {
+  background-color: transparent !important;
+  border: 2px solid var(--pink-light) !important;
+  color: var(--pink-light) !important;
+  border-radius: 18px;
+  font-weight: bolder;
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 12px;
+  opacity: 1 !important;     
+  cursor: not-allowed;
+}
+
+.text-muted{
+  color: white !important;
 }

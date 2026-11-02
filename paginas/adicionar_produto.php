@@ -114,7 +114,7 @@ $sucesso = isset($_GET['ok']) && $_GET['ok'] == 1;
         <div class="sidebar-header"></div>
         <ul class="menu-list">
             <li><a href="adicionar_produto.php"><i class="bi bi-box-seam"></i><span>Add produto</span></a></li>
-            <li><a href="#"><i class="bi bi-cart3"></i><span>Cesta</span></a></li>
+            <li><a href="cesta.php"><i class="bi bi-cart3"></i><span>Cesta</span></a></li>
             <li><a href="#"><i class="bi bi-person-square"></i><span>Add fornecedor</span></a></li>
             <li><a href="produtos.php"><i class="bi bi-archive-fill"></i><span>Produtos</span></a></li>
         </ul>

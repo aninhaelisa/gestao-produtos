@@ -8,6 +8,7 @@ if (!isset($_SESSION['usuario_id'])) {
 require_once __DIR__ . '/../config/conexao.php';
 
 $mensagem = "";
+$mensagem_tipo = "success";
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_produto_id'])) {
     $idProduto = (int) $_POST['add_produto_id'];
 
@@ -21,8 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_produto_id'])) {
     $stmt->execute();
 
     if ($stmt->get_result()->num_rows === 1) {
-        $_SESSION['cesta'][] = $idProduto;
-        $mensagem = "Produto adicionado à cesta!";
+        if (!in_array($idProduto, $_SESSION['cesta'], true)) {
+            $_SESSION['cesta'][] = $idProduto;
+            $mensagem      = "Produto adicionado à cesta!";
+            $mensagem_tipo = "success";
+        } else {
+            $mensagem      = "Este produto já está na cesta.";
+            $mensagem_tipo = "warning";
+        }
     }
     $stmt->close();
 }
@@ -68,7 +75,7 @@ $conn->close();
 
 <body class="pagina-login">
 
-<!------------------------------------------------------------------------------->
+    <!------------------------------------------------------------------------------->
 
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
         <span></span>
@@ -80,7 +87,7 @@ $conn->close();
         <div class="sidebar-header"></div>
         <ul class="menu-list">
             <li><a href="adicionar_produto.php"><i class="bi bi-box-seam"></i><span>Add produto</span></a></li>
-            <li><a href="#"><i class="bi bi-cart3"></i><span>Cesta</span></a></li>
+            <li><a href="cesta.php"><i class="bi bi-cart3"></i><span>Cesta</span></a></li>
             <li><a href="#"><i class="bi bi-person-square"></i><span>Add fornecedor</span></a></li>
             <li><a href="produtos.php"><i class="bi bi-archive-fill"></i><span>Produtos</span></a></li>
         </ul>
@@ -100,12 +107,11 @@ $conn->close();
                 </button>
             </div>
         </form>
-    <!------------------------------------------------------------------------------->
+        <!------------------------------------------------------------------------------->
 
         <?php if ($mensagem): ?>
-            <div class="alert alert-success mt-3"><?= htmlspecialchars($mensagem) ?></div>
+            <div class="alert alert-<?= $mensagem_tipo ?> mt-3"><?= htmlspecialchars($mensagem) ?></div>
         <?php endif; ?>
-
         <div class="row mt-4">
             <?php if (empty($produtos)): ?>
                 <div class="col-12">
@@ -128,12 +134,20 @@ $conn->close();
                                 <p class="fw-bold fs-5 mt-auto">
                                     R$ <?= number_format($p['preco'], 2, ',', '.') ?>
                                 </p>
-                                <form method="post" class="mt-2">
-                                    <input type="hidden" name="add_produto_id" value="<?= (int) $p['id'] ?>">
-                                    <button type="submit" class="btn btn-primary w-100 custom-btn-cesta">
-                                        <i class="bi bi-cart-plus"></i> Adicionar à cesta
+                                <?php $na_cesta = in_array($p['id'], $_SESSION['cesta'], true); ?>
+
+                                <?php if ($na_cesta): ?>
+                                    <button class="btn w-100 custom-btn-cesta-na" disabled>
+                                        <i class="bi bi-check-circle"></i> Já está na cesta
                                     </button>
-                                </form>
+                                <?php else: ?>
+                                    <form method="post" class="mt-2">
+                                        <input type="hidden" name="add_produto_id" value="<?= (int) $p['id'] ?>">
+                                        <button type="submit" class="btn btn-primary w-100 custom-btn-cesta">
+                                            <i class="bi bi-cart-plus"></i> Adicionar à cesta
+                                        </button>
+                                    </form>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
