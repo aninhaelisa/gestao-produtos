@@ -68,6 +68,8 @@ $conn->close();
 
 <body class="pagina-login">
 
+<!------------------------------------------------------------------------------->
+
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
         <span></span>
         <span></span>
@@ -77,10 +79,10 @@ $conn->close();
     <nav class="sidebar" id="sidebar">
         <div class="sidebar-header"></div>
         <ul class="menu-list">
-            <li><a href="#"><i class="bi bi-box-seam"></i><span>Add produto</span></a></li>
+            <li><a href="adicionar_produto.php"><i class="bi bi-box-seam"></i><span>Add produto</span></a></li>
             <li><a href="#"><i class="bi bi-cart3"></i><span>Cesta</span></a></li>
             <li><a href="#"><i class="bi bi-person-square"></i><span>Add fornecedor</span></a></li>
-            <li><a href="#"><i class="bi bi-archive-fill"></i><span>Produtos</span></a></li>
+            <li><a href="produtos.php"><i class="bi bi-archive-fill"></i><span>Produtos</span></a></li>
         </ul>
     </nav>
 
@@ -98,6 +100,7 @@ $conn->close();
                 </button>
             </div>
         </form>
+    <!------------------------------------------------------------------------------->
 
         <?php if ($mensagem): ?>
             <div class="alert alert-success mt-3"><?= htmlspecialchars($mensagem) ?></div>

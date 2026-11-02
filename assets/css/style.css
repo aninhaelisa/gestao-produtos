@@ -261,7 +261,7 @@ body.pagina-login {
 }
 
 .search-custom {
-  border: 3px solid #ffffff !important; /* Controla a espessura (Ex: 3px ou 4px) e a cor branca */
+  border: 3px solid #ffffff !important; 
 }
 
 .custom-btn-cesta{
@@ -287,4 +287,48 @@ body.pagina-login {
 
 .mb-4 {
   margin-bottom: 15px !important;
+}
+
+.form-produto {
+  padding: 1.25rem 1.5rem !important;
+  min-width: 742px;
+}
+
+.form-produto .form-label {
+  font-size: .8rem;
+  margin-bottom: .25rem;           
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+
+.form-produto .form-control,
+.form-produto .form-select {
+  padding: .35rem .6rem;            
+  font-size: .9rem;
+  min-height: 34px;                     
+}
+
+.form-produto textarea.form-control {
+  min-height: 60px;                 
+  resize: vertical;
+}
+
+.form-produto .mb-3 {
+  margin-bottom: .75rem !important;     
+}
+
+.form-produto .mb-4 {
+  margin-bottom: 1rem !important;
+}
+
+.form-produto .custom-btn {
+  padding: 9px !important;        
+  font-size: .85rem;
+  transition: all .3s ease-in-out;
+}
+
+.titulo-form-produto {
+  font-size: 1.3rem;
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
 }
